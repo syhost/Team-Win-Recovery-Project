@@ -42,13 +42,18 @@ static RecoveryUI* ui = NULL;
 static void
 set_usb_driver(bool enabled) {
     int fd = open("/sys/class/android_usb/android0/enable", O_WRONLY);
-    if (fd < 0) {
+    if (fd < 0) 
+    {
+		fd = open("sys/class/usb_composite/rndis/enable", O_WRONLY);
+		if (fd < 0)
+		{
 /* These error messages show when built in older Android branches (e.g. Gingerbread)
    It's not a critical error so we're disabling the error messages.
         ui->Print("failed to open driver control: %s\n", strerror(errno));
 */
 		LOGI("failed to open driver control: %s\n", strerror(errno));
         return;
+		}
     }
     if (write(fd, enabled ? "1" : "0", 1) < 0) {
 /*

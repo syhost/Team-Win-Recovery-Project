@@ -962,6 +962,7 @@ int DataManager::GetMagicValue(const string varName, string& value)
         value = tmp;
         return 0;
     }
+    
     return -1;
 }
 

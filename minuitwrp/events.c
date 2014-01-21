@@ -567,6 +567,9 @@ static int vk_modify(struct ev *e, struct input_event *ev)
     // On first touch, see if we're at a virtual key
     if (downX == -1)
     {
+#ifdef TW_CUSTOM_VIBRATOR_TIME_MS
+		vibrate(TW_CUSTOM_VIBRATOR_TIME_MS);
+#endif
         // Attempt mapping to virtual key
         for (i = 0; i < e->vk_count; ++i)
         {
